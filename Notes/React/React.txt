@@ -1,0 +1,5 @@
+REACT 101
+    -   can write JS directly in render before return without {}, as not yet within JSX code
+    -   inside return statement, place variable name inside curly braces
+    TERNARY EXPRESSION
+    -   condition ? expressionIfTrue : expressionIfFalse

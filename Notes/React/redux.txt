@@ -1,0 +1,36 @@
+REDUX
+    - describe how your state is updated over time in response to action objects
+    - to know what is goin on in the app
+    - state management framework
+    - change something in the state, need to dispatch action.
+    -   Principles
+        -   Single source of truth; state of whole app stored in an object tree within a single store
+        -   State is read only; change state by emit an action (obj describing what happened)
+        -   Changes are made with pure functions; to specify how the state tree transformed by actions, write pure reducers
+
+        redux store
+            const variableName = methodName( argumentName );
+            const store = Redux.createStore(reducer);
+
+
+REDUCER
+    - to tie state and actions together
+    - PURE FUNCTION that takes state and action as arguments, return the next state of the app
+
+ACTION
+    - plain JS OBJECT that describes what happened
+    - contains info about an action event that has occurred
+    -   a messenger that deliver information about events happening in app to redux store.
+    - TYPE PROPERTY
+    - actionCreator => JS func that return an action
+        let action = {
+            type:'LOGIN'
+        }
+        const actionCreator = () => (action)
+    - use .dispatch to send the state to store
+
+
+
+
+
+Store => ibject that hold the app's source tree.

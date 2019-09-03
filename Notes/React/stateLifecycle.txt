@@ -1,0 +1,124 @@
+STATE
+    similar to props, +private +fully controlled
+    use if want to update UI every seconds
+    create components that are dynamic and interactive.
+    -we can update,render,pass as props to child components
+
+    PROPS                                       STATE
+-   passed to components                        managed within components
+-   function parameter                          variable declared in func body
+-   immutable                                   can be changed
+-   props - functional components               useState Hook - func components
+    this.props - class components               this.state - class components
+
+    HOW to add state?
+    -   it has to be a class
+    -   declaring state property on the components class constructor
+    -   state property must be set to JS object
+            this.state = {
+                //describe state
+            }
+
+
+
+        1. It have to be class
+            class Clock extends React.Component {
+                render() {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                }
+            }
+        2. replace this.props.date -> this.state.date
+            class Clock extends React.Component {
+                render() {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                }
+            }
+        3. add class constructor that assigns initial this.state
+            class Clock extends React.Component {
+                constructor(props){
+                    super(props);
+                    this.state = {date: new Date()};
+                }
+                render() {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                }
+            }
+        4. remove date prop from <Clock />
+            class Clock extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {date: new Date()};
+                }
+                render() {
+                    return (
+                    <div>
+                        <h1>Hello, world!</h1>
+                        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                    </div>
+                    );
+                    }
+            }
+
+            ReactDOM.render(
+            <Clock />,
+            document.getElementById('root')
+            );
+    HOW TO CHANGE state
+        this.setState({
+            x: y
+        });
+
+LIFECYCLE
+-   control what happens when each tiny section of ur UI renders, updates, thinks about re-rendering, and then disappears entirely
+
+    componentWillMount()
+        -   App configuration in your root component
+        call setState - dont
+    componentDidMount()
+        -   runs after component output has been rendered
+        -   want to set something up
+        -   component mounted and ready to be use
+        -   load data
+        -   add event listener
+        call setState - yes
+    componentWillReceiveProps(nextProps)
+        -   new props arrived
+        -   access next props via nextProps and current props via this.props
+            ->check which props will changed
+            ->if the props will change in a way that is significant
+        -   not called on initial render
+        -   acting on particular prop changes to trigger state transitions
+        call setState - yes
+    shouldComponentUpdate(nextProps, nextState)
+        -   have new props; ask permission first
+        -   always return boolean
+        -   controlling exactly when your component will re-render
+        call setState - no
+    componentWillUpdate()
+        -   almost similar to componentWillReceiveProps except not allowed to call this.setState
+        -   make sense if use shouldComponentUpdate() and needed to do something when props change
+        -   used instead of componentWillReceiveProps on a component that also has shouldComponentUpdate(no access to prev props)
+        call setState - no
+    componentDidUpdate
+        -   updating DOM in response to prop or state changes
+        call setState - yes
+    componentWillUnmount
+        -   cancel any outgoung network requests, remove all event listeners associated with the component
+        -   before it goes, ask if have any requests
+        -   cleaning up any leftover debris from component
+        call setState - no

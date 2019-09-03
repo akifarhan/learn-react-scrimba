@@ -1,0 +1,9 @@
+INLINE STYLE
+    <div style={{color:"red", fontSize:64}}/>
+
+    const styles ={
+        color:"purple",
+        fontSize:40,
+        border: "2px solid purple"
+    }
+    <div style={styles}/>
